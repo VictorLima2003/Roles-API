@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id         String     @id @default(uuid())
+  name       String
+  username   String     @unique
+  password   String
+  created_at DateTime   @default(now())
+  roles      UserRole[]
+}
+
+model Role {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String
+  created_at  DateTime         @default(now())
+  permissions RolePermission[]
+  users       UserRole[]
+}
+
+model Permission {
+  id          String           @id @default(uuid())
+  name        String           @unique
+  description String
+  created_at  DateTime         @default(now())
+  roles       RolePermission[]
+}
+
+model Product {
+  id          String   @id @default(uuid())
+  name        String   @unique
+  description String
+  price       Decimal
+  created_at  DateTime @default(now())
+}
+
+model RolePermission {
+  id           String     @id @default(uuid())
+  permission   Permission @relation(fields: [permissionId], references: [id])
+  permissionId String
+  role         Role       @relation(fields: [roleId], references: [id])
+  roleId       String
+  create_at    DateTime   @default(now())
+}
+
+model UserRole {
+  id     String @id @default(uuid())
+  user   User   @relation(fields: [userId], references: [id])
+  userId String
+  role   Role   @relation(fields: [roleId], references: [id])
+  roleId String
+}
