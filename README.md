@@ -7,7 +7,7 @@
 - Main technologies used
 - Applied knowledge
 - Headaches
-- How to apply
+- How execute
 
 ## 🎉 The project
 
@@ -43,4 +43,19 @@ $ git clone <https://github.com/VictorLima2003/Roles-API.git>
 # Install dependencies
 $ npm install
 ```
-Crie os arquivos: __.env.development__, __.env.test__, __.env.production__ e preencha-os com o modelo de exemplo, contido no arquivo __.env.example__
+Create the files: __.env.development__, __.env.test__, __.env.production__ and fill them with the example template, contained in the file __.env.example__. ATTENTION: The application's DB's work with Postgresql. If you prefer to use another one for testing, for example, please check the Prisma documentation. I didn't find much flexibility in working with different DB's in different environments 😞
+
+```bash
+# Execute migrations
+$ npm run migrate:dev
+$ npm run migrate:test
+$ npm run migrate:prod
+
+# To raise the development server
+$ npm run dev
+
+# To perform the tests
+$ npm run test
+´´´
+
+Obrigado!
