@@ -56,6 +56,6 @@ $ npm run dev
 
 # To perform the tests
 $ npm run test
-´´´
+```
 
 Obrigado!
